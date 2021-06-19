@@ -7,9 +7,9 @@ class Database {
 function getConn() {
 
 $host = "localhost";
-$db = "articles";
-$user = "goi";
-$pass = "password";
+$dbname = "articles";
+$user = "yourDBUsername";
+$pass = "yourDBPassword";
 
 $dsn = 'mysql:host=' .$host . ';dbname=' . $db . ';charset=utf8';
 
