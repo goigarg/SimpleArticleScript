@@ -6,6 +6,7 @@ class Article {
     public $title;
     public $post;
     public $errors = [];
+    public $image_file;
 
     //return all articles
     public static function getAll($conn) {
@@ -53,6 +54,26 @@ class Article {
         }
    
         }
+        // return data with category of single id
+        public static function getByCategory($conn, $id) {
+
+            $sql = "SELECT article.id,title,post,category,image_file 
+            FROM article 
+            LEFT JOIN article_category 
+            ON article.id = article_id 
+            LEFT JOIN category 
+            ON category_id = category.id 
+            WHERE article.id = :id";
+            
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        }
+
+
 
 
     //Update article by id
@@ -70,7 +91,7 @@ class Article {
         //return object instead of array 
         $stmt->setFetchMode(PDO::FETCH_CLASS, 'Article');
 
-        return ($stmt->execute());
+        return $stmt->execute();
 
     }
 
@@ -121,6 +142,19 @@ class Article {
             $this->errors[] = 'Content is Required';
         }
         return (empty($this->errors));
+
+    }
+
+    public function setImageFile($conn,$file) {
+        $sql = "UPDATE article SET image_file = :image_file
+        WHERE id = :id";
+
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bindValue(':image_file',$file, $file == null ? PDO::PARAM_NULL : PDO::PARAM_STR);
+        $stmt->bindValue(':id', $this->id, PDO::PARAM_STR);
+
+        return $stmt->execute();
 
     }
 

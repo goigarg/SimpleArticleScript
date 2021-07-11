@@ -4,7 +4,6 @@ require "includes/init.php";
 
 require "includes/head.php";
 
-
 $db = new Database();
 $conn = $db->getConn();
 
