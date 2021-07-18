@@ -7,7 +7,7 @@ class Database {
 function getConn() {
 
 $host = "localhost";
-$db = "articles";
+$db = "article";
 $user = "goi";
 $pass = "password";
 

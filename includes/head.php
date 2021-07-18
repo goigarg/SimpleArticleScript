@@ -9,6 +9,7 @@
 
 <html>
   <heat><title>MY BLOG</title></head>
+  
   <link href="includes/bootstrap.css" rel="stylesheet">
 
   <style>

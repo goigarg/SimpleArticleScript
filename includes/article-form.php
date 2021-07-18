@@ -16,10 +16,22 @@
    <label>Content</label>
     <textarea name = "post" class="form-control"><?= htmlspecialchars($article->post); ?></textarea><br>
     
-      <button class = "btn btn-outline-dark" style="width: 30%;">Submit</button>
-      <?php if ($_SERVER['REQUEST_URI'] != 'new.php'): ?>
+    <label>Category</label>
 
-      <?php endif; ?>
+    <?php foreach($categories as $category) : ?>
+    
+    <div>
+
+        <input type = "checkbox" name="category[]" value="<?= $category['id']; ?>" id = "<?=$category['id'];?>" <?= in_array($category['id'], $category_id) ? 'checked' : '' ?>>
+
+        <label for = "<?=$category['id'];?>"><?= htmlspecialchars($category['name']); ?></label>
+
+    </div>
+    
+    <?php endforeach; ?>
+
+    <button class = "btn btn-outline-dark" style="width: 30%;">Submit</button>
+      
   </form>
   </div>
 

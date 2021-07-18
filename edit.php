@@ -16,10 +16,21 @@ $article = Article::getArticle($conn,$_GET["id"]);
 
 
 
+$categories = Category::getAll($conn);
+
+$category_id = array_column($article->getByCategory($conn, $_GET["id"]), 'category_id');
+echo '<hr>';
+
+
+
 if(isset($_GET["id"])) {
 
    
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+        $category_id = $_POST['category'] ?? [];
+        var_dump($category_id);
+        exit;
 
         $article->id = $_GET['id'];
         $article->title = $_POST['title'];
@@ -47,10 +58,11 @@ if(isset($_GET["id"])) {
     <?php if (empty($article)): ?>
       <p>Article Not Found</p>
     <?php else: ?>
-        <h1>Post New Article </h1>
+        <h1>Edit Article </h1>
 
         <?php include 'includes/article-form.php'; ?>
-        
+
+    
 
 <?php endif; ?>
 

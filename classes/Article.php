@@ -57,7 +57,7 @@ class Article {
         // return data with category of single id
         public static function getByCategory($conn, $id) {
 
-            $sql = "SELECT article.id,title,post,category,image_file 
+            $sql = "SELECT article.id,title,post,category_id,category,image_file 
             FROM article 
             LEFT JOIN article_category 
             ON article.id = article_id 
